@@ -1,5 +1,10 @@
-import 'package:flutter/material.dart';
+// ignore_for_file: prefer_const_constructors
 
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weather/data/weather_repository.dart';
+
+import 'cubit/weather_cubit.dart';
 import 'pages/weather_search.dart';
 
 void main() => runApp(MyApp());
@@ -14,7 +19,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.pink,
       ),
-      home: WeatherSearch(),
+      home: BlocProvider(
+        create: (context) => WeatherCubit(FakeWeatherRepository()),
+        child: WeatherSearch(),
+      ),
     );
   }
 }
